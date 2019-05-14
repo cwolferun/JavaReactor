@@ -1,0 +1,19 @@
+{
+  "name": "juice",
+  "otherthing": "wada",
+  "dependencies": {
+    "name": "downOne",
+    "otherthing": "wada",
+    "dependencies": {
+      "name": "downTwo",
+      "dependencies": {
+        "name": "downThree",
+        "otherthing": "wada",
+        "dependencies": {
+          "name": "downFour",
+          "otherThing": "onemore"
+        }
+      }
+    }
+  }
+}
