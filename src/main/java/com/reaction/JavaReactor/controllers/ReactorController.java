@@ -34,8 +34,8 @@ import java.util.stream.Stream;
 @RestController
 public class ReactorController {
 
-@Autowired
-RestTemplateBuilder restTemplate;
+    @Autowired
+    RestTemplateBuilder restTemplate;
 
     @Autowired
     TaxRx taxRx;
@@ -47,6 +47,8 @@ RestTemplateBuilder restTemplate;
     private ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
     private byte[] prim;
+
+    String home = System.getProperty("user.home");
 
     @SneakyThrows
     @PostConstruct
@@ -114,10 +116,20 @@ RestTemplateBuilder restTemplate;
     }
 
     @GetMapping("/self.zip")
-    public byte[] getSelf(){
-        ByteArrayInputStream bufferedInputStream = new ByteArrayInputStream(restTemplate.build().getForEntity("http://localhost:8080/file.zip",byte[].class).getBody());
+    public byte[] getSelf() {
+        ByteArrayInputStream bufferedInputStream = new ByteArrayInputStream(restTemplate.build().getForEntity("http://localhost:8080/file.zip", byte[].class).getBody());
 
-       return bufferedInputStream.readAllBytes();
+        return bufferedInputStream.readAllBytes();
     }
+
+@SneakyThrows
+    @GetMapping("/chive")
+    public byte[] getGo() {
+        Path path = Paths.get(home, "archie.zip");
+
+        return new BufferedInputStream(new FileInputStream(path.toFile())).readAllBytes();
+
+    }
+
 
 }
